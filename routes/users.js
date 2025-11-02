@@ -191,7 +191,8 @@ module.exports = function (router) {
             }
 
             await user.remove();
-            return ok(res, {}, 200, 'User deleted');
+            // Per updated requirement: 204 No Content on successful delete, no response body
+            return res.status(204).send();
         } catch (e) {
             return fail(res, 500, 'Failed to delete user');
         }

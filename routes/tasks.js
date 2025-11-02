@@ -209,7 +209,8 @@ module.exports = function (router) {
 
             await removeTaskFromAnyUser(task);
             await task.remove();
-            return ok(res, {}, 200, 'Task deleted');
+            // Per updated requirement: 204 No Content on successful delete, no response body
+            return res.status(204).send();
         } catch (e) {
             return fail(res, 500, 'Failed to delete task');
         }
